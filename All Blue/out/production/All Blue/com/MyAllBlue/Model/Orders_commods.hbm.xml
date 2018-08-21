@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.Orders_commods" table="orders_commods">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="countsize" column="count"></property>
+        <property name="totalprice" column="totalprice"></property>
+        <property name="ordertime" column="ordertime" />
+        <property name="usercomment">
+            <column name="usercomment" default="0" />
+        </property>
+        <many-to-one name="orders" class="com.MyAllBlue.Model.Orders" column="orders"></many-to-one>
+        <many-to-one name="commod" class="com.MyAllBlue.Model.Commod" column="commods"></many-to-one>
+        <many-to-one name="userInfo" class="com.MyAllBlue.Model.UserInfo" column="userinfo"/>
+        <many-to-one name="state" class="com.MyAllBlue.Model.State" column="state" />
+    </class>
+</hibernate-mapping>

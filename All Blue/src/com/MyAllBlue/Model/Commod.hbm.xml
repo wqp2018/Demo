@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.Commod" table="commod">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="commodname" column="commodname" />
+        <property name="pic" column="pic" />
+        <property name="salecount" column="salecount" />
+        <property name="price" column="price" />
+        <property name="hascount" column="hascount" />
+        <property name="isDelete">
+            <column name="isDelete" default="0" />
+        </property>
+        <set name="discuss">
+            <key column="commod_discuss"></key>
+            <one-to-many class="com.MyAllBlue.Model.Discuss"></one-to-many>
+        </set>
+        <many-to-one name="category" column="commod_type" class="com.MyAllBlue.Model.Category" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.multipart.maxSize" value="20480000"/>
+    <constant name="struts.multipart.saveDir" value="/tmp"></constant>
+
+
+    <package name="user" namespace="/" extends="struts-default">
+
+        <interceptors>
+            <!-- goods拦截器 -->
+            <interceptor name="userInterceptor" class="com.MyAllBlue.MyInterceptor.UserInterceptor"></interceptor>
+        </interceptors>
+
+        <!-- 定义全局结果 -->
+        <global-results>
+            <result name="error">userLogin.jsp</result>
+            <result name="usernameError">error.jsp</result>
+        </global-results>
+        <action name="user_*" class="userAction" method="{1}">
+            <interceptor-ref name="userInterceptor">
+                <param name="includeMethods">updateInfo,changePw,checkPw,toUpdate,MyInfo,outLogin</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="breakLogin">Comment/commonPage.jsp</result>
+            <result name="login">Comment/commonPage.jsp</result>
+            <result name="outLogin">userLogin.jsp</result>
+            <result name="input">error.jsp</result>
+            <result name="myInfo">User/MyInfo.jsp</result>
+            <result name="toUpdate">User/UpdateMyInfo.jsp</result>
+            <result name="upPwSuccess">User/changePw.jsp</result>
+            <result name="upPwError">User/upPwError.jsp</result>
+            <result name="changePw">User/changPwSuccess.jsp</result>
+            <result name="updateInfo">Comment/commonPage.jsp</result>
+            <result name="registerSuccess">registerSuccess.jsp</result>
+        </action>
+    </package>
+    <package name="userjson" namespace="/" extends="json-default">
+        <action name="userAjax_*" class="userAction" method="{1}">
+           <result name="input"></result>
+        </action>
+    </package>
+    <package name="goods" namespace="/" extends="struts-default">
+        <interceptors>
+            <!-- goods拦截器 -->
+            <interceptor name="orderInterceptor" class="com.MyAllBlue.MyInterceptor.GoodsInterCeptor"></interceptor>
+        </interceptors>
+        <action name="goods_*" class="goodsAction" method="{1}">
+            <interceptor-ref name="orderInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success"></result>
+            <result name="showCommod">/Comment/showCommod.jsp</result>
+            <result name="search">/Comment/searchResult.jsp</result>
+            <result name="commodMessage">/Comment/commodMessage.jsp</result>
+        </action>
+    </package>
+
+    <package name="order" namespace="/" extends="struts-default">
+        <interceptors>
+            <!-- order拦截器 -->
+            <interceptor name="orderInterceptor" class="com.MyAllBlue.MyInterceptor.orderInterceptor"></interceptor>
+        </interceptors>
+
+        <!-- 定义全局结果 -->
+        <global-results>
+            <result name="error">default.jsp</result>
+        </global-results>
+
+        <action name="orders_*" class="orderAction" method="{1}">
+            <interceptor-ref name="orderInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="orderInfo">/Order/orderInfo.jsp</result>
+            <result name="orderSuccess">/Order/orderSuccess.jsp</result>
+            <result name="assessSuccess">User/MyInfo.jsp?time=new Date()</result>
+        </action>
+    </package>
+
+    <package name="admin" extends="struts-default" namespace="/">
+        <interceptors>
+            <interceptor name="adminInterceptor" class="com.MyAllBlue.MyInterceptor.AdminInterceptor"></interceptor>
+        </interceptors>
+        <action name="admin_*" class="adminAction" method="{1}">
+            <interceptor-ref name="adminInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="AdminPage">Admin/adminIndex.jsp</result>
+            <result name="backCall">adminLogin.jsp</result>
+            <result name="UserManage">Admin/adminPage/widgets.jsp</result>
+            <result name="OrderMessage">Admin/adminPage/tables.jsp</result>
+            <result name="panel">Admin/adminPage/panels.jsp</result>
+        </action>
+    </package>
+
+    <package name="test" extends="struts-default" namespace="/">
+        <action name="test_*" class="com.MyAllBlue.Test.TestUpload" method="{1}">
+            <result name="input">error.jsp</result>
+        </action>
+    </package>
+
+</struts>

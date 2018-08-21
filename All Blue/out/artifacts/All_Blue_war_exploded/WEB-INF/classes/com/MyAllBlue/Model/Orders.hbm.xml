@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.Orders" table="orders">
+        <id column="id" name="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="orderNum" column="ordernum" />
+        <set name="orders_commods">
+            <key column="orders"></key>
+            <one-to-many class="com.MyAllBlue.Model.Orders_commods"></one-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

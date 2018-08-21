@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.UserInfo" table="userinfo">
+        <id name="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="address" column="address" />
+        <property name="username" column="username" />
+        <property name="password" column="password" />
+        <property name="realname" column="realname" />
+        <property name="phone" column="phone" />
+        <property name="ban">
+            <column name="ban" default="0" />
+        </property>
+        <many-to-one name="role" column="userrole_id" class="com.MyAllBlue.Model.Role"></many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.Discuss" table="discuss">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="discusstime" column="discusstime" />
+        <property name="comment" length="500" column="comment" />
+        <property name="isDelete">
+            <column name="isDelete" default="1" />
+        </property>
+        <many-to-one name="userInfo" column="userinfo_discuss" class="com.MyAllBlue.Model.UserInfo"></many-to-one>
+        <!-- <many-to-one name="orders" column="order_discuss" class="com.MyAllBlue.Model.Orders"></many-to-one> -->
+        <many-to-one name="commod" column="commod_discuss" class="com.MyAllBlue.Model.Commod" />
+    </class>
+</hibernate-mapping>

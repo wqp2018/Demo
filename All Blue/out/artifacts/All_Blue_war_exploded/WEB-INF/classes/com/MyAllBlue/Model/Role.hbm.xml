@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.Role" table="role">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="rolelevel" column="rolelevel" />
+        <property name="roledescribe" column="roledescribe" />
+        <set name="userInfos">
+            <key column="userrole_id"></key>
+            <one-to-many class="com.MyAllBlue.Model.UserInfo" />
+        </set>
+        <set name="adminInfos">
+            <key column="adminrole_id"></key>
+            <one-to-many class="com.MyAllBlue.Model.AdminInfo"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

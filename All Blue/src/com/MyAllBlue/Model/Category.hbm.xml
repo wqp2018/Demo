@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="com.MyAllBlue.Model.Category" table="category">
+        <id name="id" column="id">
+            <generator class="native"></generator>
+        </id>
+        <property name="typename" column="typename" />
+        <set name="commods">
+            <key column="commod_type"></key>
+            <one-to-many class="com.MyAllBlue.Model.Commod"></one-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
